@@ -2,7 +2,7 @@
 
 > 打卡攒星星，星星换心愿 —— 把每一次坚持，都变成夜空里的一条星光大道。
 
-🌐 **推广官网**：[https://shanghai-jerry.github.io/stars-collection-opensource/](https://shanghai-jerry.github.io/stars-collection-opensource/)（由 GitHub Pages 部署）
+🌐 **推广官网**：[https://www.bigchange.top/](https://www.bigchange.top/)（自定义域名，由 GitHub Pages 部署）
 
 **星愿池** 是一款 HarmonyOS（鸿蒙）习惯养成激励应用。通过游戏化的星星奖励机制，帮助家庭成员（尤其是孩子）建立良好的日常习惯：每日打卡评分攒星星，星星兑换心愿奖励，连续打卡点亮星路、收集 12 生肖星星朋友，让成长变得有趣又有动力。
 
