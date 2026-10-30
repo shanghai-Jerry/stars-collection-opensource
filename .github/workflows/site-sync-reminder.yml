@@ -1,0 +1,78 @@
+name: site-sync-reminder
+
+# main 上的发布素材（介绍图 / 版本更新文案）新增或变更时，
+# 检查官网（gh-pages 静态站）是否已收录；未收录则开提醒 issue。
+# 同步工作流见 sync-ghpages-site skill（编辑性内容无法全自动，由人工/AI 按流程执行）。
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "images/intro_*.jpg"
+      - "*_update.md"
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  reminder:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Detect changes not yet on the website
+        id: detect
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          git fetch origin gh-pages --depth=1
+
+          pending=""
+
+          # 新介绍图：main 有、gh-pages 没有 → 需新增/更新功能营地
+          for f in images/intro_*.jpg; do
+            if ! git cat-file -e "origin/gh-pages:$f" 2>/dev/null; then
+              pending="${pending}- \`${f}\`（新介绍图 → 需补 index.html / en/index.html 功能营地）"$'\n'
+            fi
+          done
+
+          # 更新文案：官网版本区（index.html）尚未链接该 md → 需新增 ver 块
+          site_index="$(git show origin/gh-pages:index.html)"
+          for f in *_update.md; do
+            if [[ "$site_index" != *"blob/main/$f"* ]]; then
+              pending="${pending}- \`${f}\`（更新文案 → 官网版本区未收录）"$'\n'
+            fi
+          done
+
+          if [ -z "$pending" ]; then pending="(无)"; fi
+          {
+            echo 'markdown<<MARKDOWN_EOF'
+            printf '%s' "$pending"
+            echo MARKDOWN_EOF
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Ensure site-sync label exists
+        run: gh label create site-sync --description "官网待同步提醒" --color 5319E7 2>/dev/null || true
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Open reminder issue (dedup by label site-sync)
+        if: steps.detect.outputs.markdown != '(无)'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          MARKDOWN: ${{ steps.detect.outputs.markdown }}
+        run: |
+          set -euo pipefail
+          existing=$(gh issue list --label site-sync --state open --json number --jq length)
+          if [ "$existing" -gt 0 ]; then
+            echo "已有未关闭的官网同步提醒 issue，跳过"
+            exit 0
+          fi
+          gh issue create --title "🌐 官网待同步：main 有改动尚未进入 gh-pages 网站" --label "site-sync" --body-file - <<BODY
+          检测到以下内容已在 main 上，但官网（www.bigchange.top）尚未收录：
+
+          ${MARKDOWN}
+          请按 \`sync-ghpages-site\` skill 流程同步官网（先提交 main，再切 gh-pages 按 \`deploy:\` 前缀提交，中英文两页都要改）。
+          同步完成后可关闭本 issue。
+          BODY
