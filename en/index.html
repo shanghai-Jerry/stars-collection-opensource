@@ -206,6 +206,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.25}
 .ver ul{list-style:none}
 .ver li{color:var(--mist);font-size:.93rem;padding:6px 0 6px 24px;position:relative}
 .ver li::before{content:"✦";position:absolute;left:0;top:6px;font-size:.72rem;color:var(--blue)}
+.ver-banner{grid-column:1/-1;margin:6px 0 0}
+.ver-banner img{display:block;width:100%;height:auto;border-radius:14px;
+  border:1px solid rgba(143,179,255,.18);box-shadow:0 18px 44px rgba(3,8,22,.55)}
 @media (max-width:860px){.ver{grid-template-columns:1fr;gap:24px}}
 
 /* ---------- privacy ---------- */
@@ -473,6 +476,7 @@ footer{border-top:1px solid var(--line);padding:44px 0 52px;text-align:center}
             <li>One-tap full marks, done silently in the background</li>
             <li>Auto-rotates every 30 minutes; tap to swap goals</li>
             <li>Taps jump straight to the goal, scrolled and highlighted</li>
+            <li>A "switch child" chip cycles profiles on the card; hot zones open the app</li>
           </ul>
         </div>
         <div class="feature-media"><div class="phone"><img src="../images/intro_widgets.jpg" alt="Home screen widgets" loading="lazy"></div></div>
@@ -548,8 +552,16 @@ footer{border-top:1px solid var(--line);padding:44px 0 52px;text-align:center}
           <li>One-tap encouragements or a voice note; the child replies in kind</li>
           <li>Star Moments filed as cards in the growth diary, voice always replayable</li>
           <li>Smoother end-of-day wrap-up: unrated items pre-checked, "N items rated" live</li>
+          <li>Smoother dialogs: Cancel/Save pinned to the bottom bar, optional settings folded with a summary</li>
+          <li>Widgets: a "switch child" chip cycles profiles; long task names shown in full</li>
           <li>Local export is now one zip bundle — data, photos and voice notes all in</li>
         </ul>
+        <figure class="ver-banner">
+          <picture>
+            <source type="image/webp" srcset="../images/intro_v161_update.webp">
+            <img src="../images/intro_v161_update.jpg" alt="v1.6.1 update at a glance: Star Moments, replies, growth diary and more" loading="lazy">
+          </picture>
+        </figure>
       </div>
 
       <div class="ver reveal">

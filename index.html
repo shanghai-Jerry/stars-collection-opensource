@@ -206,6 +206,9 @@ h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.3}
 .ver ul{list-style:none}
 .ver li{color:var(--mist);font-size:.95rem;padding:6px 0 6px 24px;position:relative}
 .ver li::before{content:"✦";position:absolute;left:0;top:6px;font-size:.72rem;color:var(--blue)}
+.ver-banner{grid-column:1/-1;margin:6px 0 0}
+.ver-banner img{display:block;width:100%;height:auto;border-radius:14px;
+  border:1px solid rgba(143,179,255,.18);box-shadow:0 18px 44px rgba(3,8,22,.55)}
 @media (max-width:860px){.ver{grid-template-columns:1fr;gap:24px}}
 
 /* ---------- 隐私 ---------- */
@@ -473,6 +476,7 @@ footer{border-top:1px solid var(--line);padding:44px 0 52px;text-align:center}
             <li>一键满分后台静默完成，不打断手头的事</li>
             <li>每 30 分钟自动轮换，长按「换一个」重点突出</li>
             <li>点击直达评分页，自动滚动定位并高亮</li>
+            <li>「切宝宝」chip 一键循环换娃，进 App 热区直达对应页面</li>
           </ul>
         </div>
         <div class="feature-media"><div class="phone"><img src="images/intro_widgets.jpg" alt="桌面服务卡片介绍图" loading="lazy"></div></div>
@@ -548,8 +552,16 @@ footer{border-top:1px solid var(--line);padding:44px 0 52px;text-align:center}
           <li>快捷鼓励一句话或录一段语音，递给宝贝双向回应</li>
           <li>星星时刻独立成卡存进成长日记，语音随时重听</li>
           <li>睡前一键收尾升级：没评的自动勾好，「评满所选 N 项」实时可见</li>
+          <li>弹窗优化：取消/保存常驻底栏，选填设置折叠带摘要</li>
+          <li>桌面卡片：「切宝宝」一键循环换娃，子项任务全名展示</li>
           <li>本地导出改为单包 zip 备份：数据、照片、语音留言一条不落</li>
         </ul>
+        <figure class="ver-banner">
+          <picture>
+            <source type="image/webp" srcset="images/intro_v161_update.webp">
+            <img src="images/intro_v161_update.jpg" alt="星愿池 v1.6.1 版本更新一览横图" loading="lazy">
+          </picture>
+        </figure>
       </div>
 
       <div class="ver reveal">
